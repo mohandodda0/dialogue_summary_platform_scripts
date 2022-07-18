@@ -55,7 +55,32 @@ for doc in docs:
 #     })
 # for key in results:
 #     print(key)
-# print(results)
+a = results
+d = {}
+count = 0
+out= {}
+out["ZBT"] = []
+for val in a['ZBT']['testannotations'][90:]:
+    if val["fname"] in d:
+        count+=1
+    else:
+        out["ZBT"].append(val) 
+        d[val["fname"]] = val["scores"]
+d = {}
+out["Kayleigh Butera"] = []
+for val in a['Kayleigh Butera']['testannotations'][76:]:
+    if val["fname"] in d:
+        count+=1
+    else:
+        out["Kayleigh Butera"].append(val) 
+        d[val["fname"]] = val["scores"]
 
-with open("agreementresults4.json", "w") as outfile:
-    json.dump(results, outfile)
+
+import json
+with open("annotatedresults.json", "w") as outfile:
+    json.dump(out, outfile)
+print("total annotations:")
+print(len(out['ZBT'])+len(out['Kayleigh Butera']))
+
+# with open("agreementresults4.json", "w") as outfile:
+#     json.dump(results, outfile)
